@@ -1,13 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMMSC - Cikahuripan Makmur Mandiri Sejahtera</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMMSC - Cikahuripan Makmur Mandiri Sejahtera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            box-sizing: border-box;
+        }
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .glass { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
         .animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
@@ -15,342 +18,269 @@
         .hover-scale { transition: transform 0.2s; }
         .hover-scale:hover { transform: scale(1.02); }
     </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 py-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center p-1">
-                        <img src="https://i.ibb.co.com/v4NKSG9W/logo.png" alt="CMMSC Logo" class="w-full h-full object-contain">
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold">CMMSC</h1>
-                        <p class="text-blue-100 text-sm">Cikahuripan Makmur Mandiri Sejahtera</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <span class="text-blue-100">Admin Panel</span>
-                    <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                        <span class="text-sm font-semibold">A</span>
-                    </div>
-                </div>
-            </div>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="bg-gray-50"><!-- Login Screen -->
+  <div id="loginScreen" class="min-h-full flex items-center justify-center px-4 py-12">
+   <div class="max-w-md w-full">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 animate-fade-in">
+     <div class="text-center mb-8">
+      <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 p-2"><img src="https://i.ibb.co.com/v4NKSG9W/logo.png" alt="CMMSC Logo" class="w-full h-full object-contain">
+      </div>
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">CMMSC Admin</h1>
+      <p class="text-gray-600">Cikahuripan Makmur Mandiri Sejahtera</p>
+     </div>
+     <form id="loginForm" class="space-y-6">
+      <div><label class="block text-sm font-semibold text-gray-700 mb-2">Username</label> <input type="text" id="loginUsername" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Masukkan username">
+      </div>
+      <div><label class="block text-sm font-semibold text-gray-700 mb-2">Password</label> <input type="password" id="loginPassword" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Masukkan password">
+      </div>
+      <div id="loginError" class="hidden p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"></div><button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale"> 🔐 Login Admin </button>
+     </form>
+     <div class="mt-6 pt-6 border-t border-gray-200"><button onclick="showPublicForm()" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale"> 📝 Formulir Pendaftaran Pelanggan </button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Public Registration Form (No Login Required) -->
+  <div id="publicFormScreen" class="hidden min-h-full px-4 py-8">
+   <div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-lg p-8 animate-fade-in">
+     <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center space-x-4">
+       <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center p-2"><img src="https://i.ibb.co.com/v4NKSG9W/logo.png" alt="CMMSC Logo" class="w-full h-full object-contain">
+       </div>
+       <div>
+        <h1 class="text-2xl font-bold text-gray-800">Formulir Pendaftaran</h1>
+        <p class="text-gray-600">CMMSC - Internet Provider</p>
+       </div>
+      </div><button onclick="backToLogin()" class="text-gray-600 hover:text-gray-800 font-medium"> ← Kembali </button>
+     </div>
+     <form id="publicRegistrationForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div><label class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap *</label> <input type="text" id="pubRegName" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+      </div>
+      <div><label class="block text-sm font-semibold text-gray-700 mb-2">Nomor HP *</label> <input type="tel" id="pubRegPhone" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="08xxxxxxxxxx">
+      </div>
+      <div><label class="block text-sm font-semibold text-gray-700 mb-2">Email</label> <input type="email" id="pubRegEmail" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+      </div>
+      <div><label class="block text-sm font-semibold text-gray-700 mb-2">Paket yang Diinginkan</label> <select id="pubRegPackage" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Paket</option> <option value="BUMDes 10 Mbps - Rp 150.000">BUMDes 10 Mbps - Rp 150.000</option> <option value="Basic 10 Mbps - Rp 150.000">Basic 10 Mbps - Rp 150.000</option> <option value="Family 20 Mbps - Rp 200.000">Family 20 Mbps - Rp 200.000</option> <option value="Pro 50 Mbps - Rp 300.000">Pro 50 Mbps - Rp 300.000</option> <option value="Custom">Custom</option> </select>
+      </div>
+      <div class="md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-2">Alamat Lengkap</label> <textarea id="pubRegAddress" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"></textarea>
+      </div>
+      <div class="md:col-span-2"><button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all hover-scale"> 📝 Kirim Pendaftaran </button>
+      </div>
+     </form>
+     <div id="publicFormSuccess" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+      <p class="text-green-800 font-semibold">✅ Pendaftaran berhasil dikirim!</p>
+      <p class="text-green-700 text-sm mt-1">Tim kami akan segera menghubungi Anda.</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- Admin Dashboard (Login Required) -->
+  <div id="adminDashboard" class="hidden"><!-- Header -->
+   <header class="gradient-bg text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+       <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center p-1"><img src="https://i.ibb.co.com/v4NKSG9W/logo.png" alt="CMMSC Logo" class="w-full h-full object-contain">
+       </div>
+       <div>
+        <h1 class="text-2xl font-bold">CMMSC</h1>
+        <p class="text-blue-100 text-sm">Cikahuripan Makmur Mandiri Sejahtera</p>
+       </div>
+      </div>
+      <div class="flex items-center space-x-4"><span class="text-blue-100" id="adminUsername">Admin</span> <button onclick="logout()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all"> 🚪 Logout </button>
+      </div>
+     </div>
+    </div>
+   </header><!-- Navigation -->
+   <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-7xl mx-auto px-4">
+     <div class="flex space-x-8"><button onclick="showSection('dashboard')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> 📊 Dashboard </button> <button onclick="showSection('customers')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> 👥 Pelanggan </button> <button onclick="showSection('billing')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> 💰 Tagihan </button> <button onclick="showSection('whatsapp')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> 📱 WhatsApp </button> <button onclick="showSection('reports')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> 📈 Laporan </button> <button onclick="showSection('forms')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> 📝 Formulir </button> <button onclick="showSection('settings')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium"> ⚙️ Pengaturan </button>
+     </div>
+    </div>
+   </nav><!-- Main Content -->
+   <main class="max-w-7xl mx-auto px-4 py-8"><!-- Dashboard Section -->
+    <section id="dashboard" class="section animate-fade-in">
+     <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Dashboard</h2>
+      <p class="text-gray-600">Ringkasan sistem manajemen pelanggan internet</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
+       <div class="flex items-center justify-between">
+        <div>
+         <p class="text-gray-500 text-sm font-medium">Total Pelanggan</p>
+         <p class="text-3xl font-bold text-gray-800" id="totalCustomers">0</p>
         </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex space-x-8">
-                <button onclick="showSection('dashboard')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    📊 Dashboard
-                </button>
-                <button onclick="showSection('customers')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    👥 Pelanggan
-                </button>
-                <button onclick="showSection('billing')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    💰 Tagihan
-                </button>
-                <button onclick="showSection('whatsapp')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    📱 WhatsApp
-                </button>
-                <button onclick="showSection('reports')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    📈 Laporan
-                </button>
-                <button onclick="showSection('forms')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    📝 Formulir
-                </button>
-                <button onclick="showSection('settings')" class="nav-btn px-4 py-4 text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600 transition-all font-medium">
-                    ⚙️ Pengaturan
-                </button>
-            </div>
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"><span class="text-blue-600 text-xl">👥</span>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="section animate-fade-in">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Dashboard</h2>
-                <p class="text-gray-600">Ringkasan sistem manajemen pelanggan internet</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Pelanggan</p>
-                            <p class="text-3xl font-bold text-gray-800" id="totalCustomers">0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                            <span class="text-blue-600 text-xl">👥</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Pelanggan Aktif</p>
-                            <p class="text-3xl font-bold text-green-600" id="activeCustomers">0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                            <span class="text-green-600 text-xl">✅</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Tagihan Bulan Ini</p>
-                            <p class="text-3xl font-bold text-orange-600" id="monthlyBills">0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                            <span class="text-orange-600 text-xl">💰</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Pendapatan Bulan Ini</p>
-                            <p class="text-2xl font-bold text-purple-600" id="monthlyRevenue">Rp 0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                            <span class="text-purple-600 text-xl">📈</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Aktivitas Terbaru</h3>
-                    <div id="recentActivities" class="space-y-4">
-                        <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-xl">
-                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                <span class="text-blue-600 text-sm">👤</span>
-                            </div>
-                            <div>
-                                <p class="font-medium text-gray-800">Pelanggan baru ditambahkan</p>
-                                <p class="text-gray-500 text-sm">2 menit yang lalu</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <button onclick="showSection('customers'); document.getElementById('addCustomerBtn').click();" class="p-4 bg-blue-50 hover:bg-blue-100 rounded-xl text-left transition-all">
-                            <div class="text-blue-600 text-2xl mb-2">➕</div>
-                            <p class="font-semibold text-gray-800">Tambah Pelanggan</p>
-                        </button>
-                        <button onclick="showSection('billing'); generateBills();" class="p-4 bg-green-50 hover:bg-green-100 rounded-xl text-left transition-all">
-                            <div class="text-green-600 text-2xl mb-2">💰</div>
-                            <p class="font-semibold text-gray-800">Generate Tagihan</p>
-                        </button>
-                        <button onclick="showSection('whatsapp');" class="p-4 bg-purple-50 hover:bg-purple-100 rounded-xl text-left transition-all">
-                            <div class="text-purple-600 text-2xl mb-2">📱</div>
-                            <p class="font-semibold text-gray-800">Kirim WhatsApp</p>
-                        </button>
-                        <button onclick="showSection('reports');" class="p-4 bg-orange-50 hover:bg-orange-100 rounded-xl text-left transition-all">
-                            <div class="text-orange-600 text-2xl mb-2">📊</div>
-                            <p class="font-semibold text-gray-800">Lihat Laporan</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Customers Section -->
-        <section id="customers" class="section hidden animate-fade-in">
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Manajemen Pelanggan</h2>
-                    <p class="text-gray-600">Kelola data pelanggan internet</p>
-                </div>
-                <button id="addCustomerBtn" onclick="openCustomerModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale">
-                    ➕ Tambah Pelanggan
-                </button>
-            </div>
-
-            <!-- Import/Export Section -->
-            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Impor Data Pelanggan (CSV/Excel)</h3>
-                <div class="flex flex-wrap gap-4">
-                    <div>
-                        <input type="file" id="csvFile" accept=".csv,.xlsx,.xls" class="hidden" onchange="handleFileImport(event)">
-                        <button onclick="document.getElementById('csvFile').click()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all">
-                            📁 Impor Excel (XLSX)
-                        </button>
-                    </div>
-                    <button onclick="exportCustomersToExcel()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all">
-                        📊 Ekspor ke Excel (XLSX)
-                    </button>
-                    <button onclick="downloadTemplate()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-all">
-                        📋 Download Template
-                    </button>
-                </div>
-                <p class="text-sm text-gray-500 mt-2">
-                    Format kolom: No., ID Pelanggan, Nama Pelanggan, Alamat, Nomor HP, Email, PPPOe, Paket Internet, Tanggal Aktif, Status Pelanggan
-                </p>
-            </div>
-
-            <!-- Search and Filter -->
-            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
-                <div class="flex flex-wrap gap-4">
-                    <div class="flex-1 min-w-64">
-                        <input type="text" id="searchCustomer" placeholder="Cari pelanggan..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" onkeyup="searchCustomers()">
-                    </div>
-                    <select id="statusFilter" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" onchange="filterCustomers()">
-                        <option value="">Semua Status</option>
-                        <option value="active">Aktif</option>
-                        <option value="inactive">Nonaktif</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Customers Table -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">ID</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Nama</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Nomor HP</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">PPPOe</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Paket</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="customersTableBody" class="divide-y divide-gray-200">
-                            <!-- Customer rows will be inserted here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Billing Section -->
-        <section id="billing" class="section hidden animate-fade-in">
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Manajemen Tagihan</h2>
-                    <p class="text-gray-600">Kelola tagihan bulanan pelanggan</p>
-                </div>
-                <button onclick="generateBills()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale">
-                    💰 Generate Tagihan Bulan Ini
-                </button>
-            </div>
-
-            <!-- Billing Controls -->
-            <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Filter Tagihan</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <select id="billMonth" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        <option value="">Pilih Bulan</option>
-                        <option value="1">Januari</option>
-                        <option value="2">Februari</option>
-                        <option value="3">Maret</option>
-                        <option value="4">April</option>
-                        <option value="5">Mei</option>
-                        <option value="6">Juni</option>
-                        <option value="7">Juli</option>
-                        <option value="8">Agustus</option>
-                        <option value="9">September</option>
-                        <option value="10">Oktober</option>
-                        <option value="11">November</option>
-                        <option value="12">Desember</option>
-                    </select>
-                    <select id="billYear" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        <option value="">Pilih Tahun</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                    </select>
-                    <select id="billStatusFilter" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        <option value="">Semua Status</option>
-                        <option value="unpaid">Belum Bayar</option>
-                        <option value="paid">Sudah Bayar</option>
-                        <option value="overdue">Terlambat</option>
-                    </select>
-                    <button onclick="filterBills()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                        🔍 Filter
-                    </button>
-                </div>
-            </div>
-
-            <!-- Bills Table -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Pelanggan</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Periode</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Jumlah</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Jatuh Tempo</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="billsTableBody" class="divide-y divide-gray-200">
-                            <!-- Bill rows will be inserted here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- WhatsApp Section -->
-        <section id="whatsapp" class="section hidden animate-fade-in">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">WhatsApp Broadcast</h2>
-                <p class="text-gray-600">Kirim notifikasi tagihan via WhatsApp</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Kirim Notifikasi Tagihan</h3>
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <select id="waMonth" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                                <option value="">Pilih Bulan</option>
-                                <option value="1">Januari</option>
-                                <option value="2">Februari</option>
-                                <option value="3">Maret</option>
-                                <option value="4">April</option>
-                                <option value="5">Mei</option>
-                                <option value="6">Juni</option>
-                                <option value="7">Juli</option>
-                                <option value="8">Agustus</option>
-                                <option value="9">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
-                            </select>
-                            <select id="waYear" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                                <option value="">Pilih Tahun</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                            </select>
-                        </div>
-                        <button onclick="sendBulkWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                            📱 Kirim ke Semua Pelanggan
-                        </button>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Template Pesan</h3>
-                    <textarea id="waTemplate" rows="8" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Template pesan WhatsApp...">Halo {nama},
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
+       <div class="flex items-center justify-between">
+        <div>
+         <p class="text-gray-500 text-sm font-medium">Pelanggan Aktif</p>
+         <p class="text-3xl font-bold text-green-600" id="activeCustomers">0</p>
+        </div>
+        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"><span class="text-green-600 text-xl">✅</span>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
+       <div class="flex items-center justify-between">
+        <div>
+         <p class="text-gray-500 text-sm font-medium">Tagihan Bulan Ini</p>
+         <p class="text-3xl font-bold text-orange-600" id="monthlyBills">0</p>
+        </div>
+        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center"><span class="text-orange-600 text-xl">💰</span>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-lg hover-scale">
+       <div class="flex items-center justify-between">
+        <div>
+         <p class="text-gray-500 text-sm font-medium">Pendapatan Bulan Ini</p>
+         <p class="text-2xl font-bold text-purple-600" id="monthlyRevenue">Rp 0</p>
+        </div>
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center"><span class="text-purple-600 text-xl">📈</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Aktivitas Terbaru</h3>
+       <div id="recentActivities" class="space-y-4">
+        <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-xl">
+         <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"><span class="text-blue-600 text-sm">👤</span>
+         </div>
+         <div>
+          <p class="font-medium text-gray-800">Sistem siap digunakan</p>
+          <p class="text-gray-500 text-sm">Selamat datang, Admin!</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h3>
+       <div class="grid grid-cols-2 gap-4"><button onclick="showSection('customers'); document.getElementById('addCustomerBtn').click();" class="p-4 bg-blue-50 hover:bg-blue-100 rounded-xl text-left transition-all">
+         <div class="text-blue-600 text-2xl mb-2">
+          ➕
+         </div><p class="font-semibold text-gray-800">Tambah Pelanggan</p></button> <button onclick="showSection('billing'); generateBills();" class="p-4 bg-green-50 hover:bg-green-100 rounded-xl text-left transition-all">
+         <div class="text-green-600 text-2xl mb-2">
+          💰
+         </div><p class="font-semibold text-gray-800">Generate Tagihan</p></button> <button onclick="showSection('whatsapp');" class="p-4 bg-purple-50 hover:bg-purple-100 rounded-xl text-left transition-all">
+         <div class="text-purple-600 text-2xl mb-2">
+          📱
+         </div><p class="font-semibold text-gray-800">Kirim WhatsApp</p></button> <button onclick="showSection('reports');" class="p-4 bg-orange-50 hover:bg-orange-100 rounded-xl text-left transition-all">
+         <div class="text-orange-600 text-2xl mb-2">
+          📊
+         </div><p class="font-semibold text-gray-800">Lihat Laporan</p></button>
+       </div>
+      </div>
+     </div>
+    </section><!-- Customers Section -->
+    <section id="customers" class="section hidden animate-fade-in">
+     <div class="flex justify-between items-center mb-8">
+      <div>
+       <h2 class="text-3xl font-bold text-gray-800 mb-2">Manajemen Pelanggan</h2>
+       <p class="text-gray-600">Kelola data pelanggan internet</p>
+      </div><button id="addCustomerBtn" onclick="openCustomerModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale"> ➕ Tambah Pelanggan </button>
+     </div><!-- Import/Export Section -->
+     <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Impor Data Pelanggan (CSV/Excel)</h3>
+      <div class="flex flex-wrap gap-4">
+       <div><input type="file" id="csvFile" accept=".csv,.xlsx,.xls" class="hidden" onchange="handleFileImport(event)"> <button onclick="document.getElementById('csvFile').click()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all"> 📁 Impor Excel (XLSX) </button>
+       </div><button onclick="exportCustomersToExcel()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all"> 📊 Ekspor ke Excel (XLSX) </button> <button onclick="downloadTemplate()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-all"> 📋 Download Template </button>
+      </div>
+      <p class="text-sm text-gray-500 mt-2">Format kolom: No., ID Pelanggan, Nama Pelanggan, Alamat, Nomor HP, Email, PPPOe, Paket Internet, Tanggal Aktif, Status Pelanggan</p>
+      <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+       <h4 class="font-semibold text-blue-800 mb-2">📋 Cara Import Data dari Google Sheets:</h4>
+       <ol class="text-sm text-blue-700 space-y-1">
+        <li>1. Buka Google Sheets Anda</li>
+        <li>2. Pilih semua data (Ctrl+A)</li>
+        <li>3. Copy data (Ctrl+C)</li>
+        <li>4. Buka Excel/LibreOffice Calc</li>
+        <li>5. Paste data (Ctrl+V)</li>
+        <li>6. Save as CSV atau XLSX</li>
+        <li>7. Upload file menggunakan tombol "Impor Excel" di atas</li>
+       </ol>
+      </div>
+     </div><!-- Search and Filter -->
+     <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+      <div class="flex flex-wrap gap-4">
+       <div class="flex-1 min-w-64"><input type="text" id="searchCustomer" placeholder="Cari pelanggan..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" onkeyup="searchCustomers()">
+       </div><select id="statusFilter" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" onchange="filterCustomers()"> <option value="">Semua Status</option> <option value="active">Aktif</option> <option value="inactive">Nonaktif</option> </select>
+      </div>
+     </div><!-- Customers Table -->
+     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="overflow-x-auto">
+       <table class="w-full">
+        <thead class="bg-gray-50">
+         <tr>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">ID</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Nama</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Nomor HP</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">PPPOe</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Paket</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Aksi</th>
+         </tr>
+        </thead>
+        <tbody id="customersTableBody" class="divide-y divide-gray-200"><!-- Customer rows will be inserted here -->
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- Billing Section -->
+    <section id="billing" class="section hidden animate-fade-in">
+     <div class="flex justify-between items-center mb-8">
+      <div>
+       <h2 class="text-3xl font-bold text-gray-800 mb-2">Manajemen Tagihan</h2>
+       <p class="text-gray-600">Kelola tagihan bulanan pelanggan</p>
+      </div><button onclick="generateBills()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale"> 💰 Generate Tagihan Bulan Ini </button>
+     </div><!-- Billing Controls -->
+     <div class="bg-white rounded-2xl p-6 shadow-lg mb-6">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Filter Tagihan</h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4"><select id="billMonth" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Bulan</option> <option value="1">Januari</option> <option value="2">Februari</option> <option value="3">Maret</option> <option value="4">April</option> <option value="5">Mei</option> <option value="6">Juni</option> <option value="7">Juli</option> <option value="8">Agustus</option> <option value="9">September</option> <option value="10">Oktober</option> <option value="11">November</option> <option value="12">Desember</option> </select> <select id="billYear" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Tahun</option> <option value="2024">2024</option> <option value="2025">2025</option> </select> <select id="billStatusFilter" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Semua Status</option> <option value="unpaid">Belum Bayar</option> <option value="paid">Sudah Bayar</option> <option value="overdue">Terlambat</option> </select> <button onclick="filterBills()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 🔍 Filter </button>
+      </div>
+     </div><!-- Bills Table -->
+     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="overflow-x-auto">
+       <table class="w-full">
+        <thead class="bg-gray-50">
+         <tr>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Pelanggan</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Periode</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Jumlah</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Jatuh Tempo</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Aksi</th>
+         </tr>
+        </thead>
+        <tbody id="billsTableBody" class="divide-y divide-gray-200"><!-- Bill rows will be inserted here -->
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- WhatsApp Section -->
+    <section id="whatsapp" class="section hidden animate-fade-in">
+     <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">WhatsApp Broadcast</h2>
+      <p class="text-gray-600">Kirim notifikasi tagihan via WhatsApp</p>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Kirim Notifikasi Tagihan</h3>
+       <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-4"><select id="waMonth" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Bulan</option> <option value="1">Januari</option> <option value="2">Februari</option> <option value="3">Maret</option> <option value="4">April</option> <option value="5">Mei</option> <option value="6">Juni</option> <option value="7">Juli</option> <option value="8">Agustus</option> <option value="9">September</option> <option value="10">Oktober</option> <option value="11">November</option> <option value="12">Desember</option> </select> <select id="waYear" class="px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Tahun</option> <option value="2024">2024</option> <option value="2025">2025</option> </select>
+        </div><button onclick="sendBulkWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 📱 Kirim ke Semua Pelanggan </button>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Template Pesan</h3><textarea id="waTemplate" rows="8" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Template pesan WhatsApp...">Halo {nama},
 
 Ini tagihan internet CMMSC untuk {periode}.
 Paket: {paket}
@@ -361,294 +291,146 @@ Jatuh tempo: {jatuh_tempo}
 
 Terima kasih.
 BUMDes Cikahuripan</textarea>
-                    <p class="text-sm text-gray-500 mt-2">
-                        Gunakan placeholder: {nama}, {paket}, {periode}, {total}, {jatuh_tempo}, {id_pelanggan}
-                    </p>
-                </div>
-            </div>
-
-            <!-- WhatsApp Logs -->
-            <div class="mt-8 bg-white rounded-2xl p-6 shadow-lg">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Log Pengiriman WhatsApp</h3>
-                <div id="whatsappLogs" class="space-y-3 max-h-96 overflow-y-auto">
-                    <!-- WhatsApp logs will be inserted here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Reports Section -->
-        <section id="reports" class="section hidden animate-fade-in">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Laporan</h2>
-                <p class="text-gray-600">Laporan pembayaran dan statistik</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Laporan Pembayaran</h3>
-                    <div class="space-y-4">
-                        <select id="reportMonth" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                            <option value="">Pilih Bulan</option>
-                            <option value="1">Januari</option>
-                            <option value="2">Februari</option>
-                            <option value="3">Maret</option>
-                            <option value="4">April</option>
-                            <option value="5">Mei</option>
-                            <option value="6">Juni</option>
-                            <option value="7">Juli</option>
-                            <option value="8">Agustus</option>
-                            <option value="9">September</option>
-                            <option value="10">Oktober</option>
-                            <option value="11">November</option>
-                            <option value="12">Desember</option>
-                        </select>
-                        <select id="reportYear" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                            <option value="">Pilih Tahun</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                        </select>
-                        <button onclick="generatePaymentReport()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                            📊 Generate Laporan
-                        </button>
-                        <button onclick="exportPaymentReport()" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                            📁 Ekspor ke Excel
-                        </button>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Ringkasan Laporan</h3>
-                    <div id="reportSummary" class="grid grid-cols-2 gap-4">
-                        <div class="p-4 bg-blue-50 rounded-xl">
-                            <p class="text-blue-600 font-semibold">Total Tagihan</p>
-                            <p class="text-2xl font-bold text-blue-800" id="totalBillsAmount">Rp 0</p>
-                        </div>
-                        <div class="p-4 bg-green-50 rounded-xl">
-                            <p class="text-green-600 font-semibold">Sudah Dibayar</p>
-                            <p class="text-2xl font-bold text-green-800" id="paidBillsAmount">Rp 0</p>
-                        </div>
-                        <div class="p-4 bg-orange-50 rounded-xl">
-                            <p class="text-orange-600 font-semibold">Belum Dibayar</p>
-                            <p class="text-2xl font-bold text-orange-800" id="unpaidBillsAmount">Rp 0</p>
-                        </div>
-                        <div class="p-4 bg-red-50 rounded-xl">
-                            <p class="text-red-600 font-semibold">Terlambat</p>
-                            <p class="text-2xl font-bold text-red-800" id="overdueBillsAmount">Rp 0</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Forms Section -->
-        <section id="forms" class="section hidden animate-fade-in">
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Formulir Pendaftaran</h2>
-                    <p class="text-gray-600">Kelola pendaftaran pelanggan baru</p>
-                </div>
-                <button onclick="exportFormsToExcel()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale">
-                    📊 Ekspor ke Excel (XLSX)
-                </button>
-            </div>
-
-            <!-- Registration Form -->
-            <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
-                <h3 class="text-xl font-bold text-gray-800 mb-6">Formulir Pendaftaran Pelanggan Baru</h3>
-                <form id="registrationForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap *</label>
-                        <input type="text" id="regName" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nomor HP *</label>
-                        <input type="tel" id="regPhone" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                        <input type="email" id="regEmail" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Paket yang Diinginkan</label>
-                        <select id="regPackage" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                            <option value="">Pilih Paket</option>
-                            <option value="BUMDes 10 Mbps - Rp 150.000">BUMDes 10 Mbps - Rp 150.000</option>
-                            <option value="Basic 10 Mbps - Rp 150.000">Basic 10 Mbps - Rp 150.000</option>
-                            <option value="Family 20 Mbps - Rp 200.000">Family 20 Mbps - Rp 200.000</option>
-                            <option value="Pro 50 Mbps - Rp 300.000">Pro 50 Mbps - Rp 300.000</option>
-                            <option value="Custom">Custom</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Alamat Lengkap</label>
-                        <textarea id="regAddress" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"></textarea>
-                    </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all hover-scale">
-                            📝 Kirim Pendaftaran
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Pending Registrations -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div class="px-6 py-4 bg-gray-50 border-b">
-                    <h3 class="text-lg font-semibold text-gray-800">Pendaftaran Masuk</h3>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Nama</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">HP</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Paket</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Tanggal</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="registrationsTableBody" class="divide-y divide-gray-200">
-                            <!-- Registration rows will be inserted here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Settings Section -->
-        <section id="settings" class="section hidden animate-fade-in">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Pengaturan Sistem</h2>
-                <p class="text-gray-600">Konfigurasi sistem dan preferensi</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Pengaturan Tagihan</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Metode Penagihan</label>
-                            <select id="billingMode" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                                <option value="by_activation">Berdasarkan Tanggal Aktivasi</option>
-                                <option value="by_admin_date">Berdasarkan Tanggal Admin</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Tagihan Admin (1-28)</label>
-                            <input type="number" id="adminBillingDay" min="1" max="28" value="5" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Metode Perhitungan Harga</label>
-                            <select id="priceCalculation" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                                <option value="per_package">Per Paket</option>
-                                <option value="per_mbps">Per Mbps</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Harga per Mbps (Rp)</label>
-                            <input type="number" id="pricePerMbps" value="15000" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Paket Internet</h3>
-                    <div id="packagesContainer" class="space-y-3 mb-4">
-                        <!-- Packages will be inserted here -->
-                    </div>
-                    <button onclick="addPackage()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-all">
-                        ➕ Tambah Paket
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-8 bg-white rounded-2xl p-6 shadow-lg">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">Backup & Restore Data</h3>
-                </div>
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="exportAllData()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                        💾 Backup Semua Data
-                    </button>
-                    <div>
-                        <input type="file" id="restoreFile" accept=".json" class="hidden" onchange="restoreData(event)">
-                        <button onclick="document.getElementById('restoreFile').click()" class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                            📁 Restore Data
-                        </button>
-                    </div>
-                    <button onclick="clearAllData()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                        🗑️ Hapus Semua Data
-                    </button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Customer Modal -->
-    <div id="customerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-800" id="modalTitle">Tambah Pelanggan Baru</h3>
-                <button onclick="closeCustomerModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
-            </div>
-            
-            <form id="customerForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Lengkap *</label>
-                    <input type="text" id="customerName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Nama lengkap pelanggan">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Nomor HP *</label>
-                    <input type="tel" id="customerPhone" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="08xxxxxxxxxx">
-                </div>
-                
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Alamat</label>
-                    <textarea id="customerAddress" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Alamat lengkap pelanggan"></textarea>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
-                    <input type="email" id="customerEmail" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="email@example.com">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">PPPOe Username</label>
-                    <input type="text" id="customerPppoe" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="username_pppoe">
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Paket Internet</label>
-                    <select id="customerPackage" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        <option value="">Pilih Paket</option>
-                        <option value="BUMDes 10 Mbps - Rp 150.000">BUMDes 10 Mbps - Rp 150.000</option>
-                        <option value="Basic 10 Mbps - Rp 150.000">Basic 10 Mbps - Rp 150.000</option>
-                        <option value="Family 20 Mbps - Rp 200.000">Family 20 Mbps - Rp 200.000</option>
-                        <option value="Pro 50 Mbps - Rp 300.000">Pro 50 Mbps - Rp 300.000</option>
-                        <option value="Custom">Custom</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Tanggal Aktivasi</label>
-                    <input type="date" id="customerActivationDate" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                </div>
-                
-                <div class="md:col-span-2 flex gap-4">
-                    <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all">
-                        💾 Simpan Pelanggan
-                    </button>
-                    <button type="button" onclick="closeCustomerModal()" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all">
-                        Batal
-                    </button>
-                </div>
-            </form>
+       <p class="text-sm text-gray-500 mt-2">Gunakan placeholder: {nama}, {paket}, {periode}, {total}, {jatuh_tempo}, {id_pelanggan}</p>
+      </div>
+     </div><!-- WhatsApp Logs -->
+     <div class="mt-8 bg-white rounded-2xl p-6 shadow-lg">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">Log Pengiriman WhatsApp</h3>
+      <div id="whatsappLogs" class="space-y-3 max-h-96 overflow-y-auto"><!-- WhatsApp logs will be inserted here -->
+      </div>
+     </div>
+    </section><!-- Reports Section -->
+    <section id="reports" class="section hidden animate-fade-in">
+     <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Laporan</h2>
+      <p class="text-gray-600">Laporan pembayaran dan statistik</p>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Laporan Pembayaran</h3>
+       <div class="space-y-4"><select id="reportMonth" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Bulan</option> <option value="1">Januari</option> <option value="2">Februari</option> <option value="3">Maret</option> <option value="4">April</option> <option value="5">Mei</option> <option value="6">Juni</option> <option value="7">Juli</option> <option value="8">Agustus</option> <option value="9">September</option> <option value="10">Oktober</option> <option value="11">November</option> <option value="12">Desember</option> </select> <select id="reportYear" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Tahun</option> <option value="2024">2024</option> <option value="2025">2025</option> </select> <button onclick="generatePaymentReport()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 📊 Generate Laporan </button> <button onclick="exportPaymentReport()" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 📁 Ekspor ke Excel </button>
+       </div>
+      </div>
+      <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Ringkasan Laporan</h3>
+       <div id="reportSummary" class="grid grid-cols-2 gap-4">
+        <div class="p-4 bg-blue-50 rounded-xl">
+         <p class="text-blue-600 font-semibold">Total Tagihan</p>
+         <p class="text-2xl font-bold text-blue-800" id="totalBillsAmount">Rp 0</p>
         </div>
+        <div class="p-4 bg-green-50 rounded-xl">
+         <p class="text-green-600 font-semibold">Sudah Dibayar</p>
+         <p class="text-2xl font-bold text-green-800" id="paidBillsAmount">Rp 0</p>
+        </div>
+        <div class="p-4 bg-orange-50 rounded-xl">
+         <p class="text-orange-600 font-semibold">Belum Dibayar</p>
+         <p class="text-2xl font-bold text-orange-800" id="unpaidBillsAmount">Rp 0</p>
+        </div>
+        <div class="p-4 bg-red-50 rounded-xl">
+         <p class="text-red-600 font-semibold">Terlambat</p>
+         <p class="text-2xl font-bold text-red-800" id="overdueBillsAmount">Rp 0</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Forms Section -->
+    <section id="forms" class="section hidden animate-fade-in">
+     <div class="flex justify-between items-center mb-8">
+      <div>
+       <h2 class="text-3xl font-bold text-gray-800 mb-2">Formulir Pendaftaran</h2>
+       <p class="text-gray-600">Kelola pendaftaran pelanggan baru</p>
+      </div><button onclick="exportFormsToExcel()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all hover-scale"> 📊 Ekspor ke Excel (XLSX) </button>
+     </div><!-- Pending Registrations -->
+     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b">
+       <h3 class="text-lg font-semibold text-gray-800">Pendaftaran Masuk</h3>
+      </div>
+      <div class="overflow-x-auto">
+       <table class="w-full">
+        <thead class="bg-gray-50">
+         <tr>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Nama</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">HP</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Paket</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Tanggal</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Aksi</th>
+         </tr>
+        </thead>
+        <tbody id="registrationsTableBody" class="divide-y divide-gray-200"><!-- Registration rows will be inserted here -->
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </section><!-- Settings Section -->
+    <section id="settings" class="section hidden animate-fade-in">
+     <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Pengaturan Sistem</h2>
+      <p class="text-gray-600">Konfigurasi sistem dan preferensi</p>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Pengaturan Tagihan</h3>
+       <div class="space-y-4">
+        <div><label class="block text-sm font-semibold text-gray-700 mb-2">Metode Penagihan</label> <select id="billingMode" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="by_activation">Berdasarkan Tanggal Aktivasi</option> <option value="by_admin_date">Berdasarkan Tanggal Admin</option> </select>
+        </div>
+        <div><label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Tagihan Admin (1-28)</label> <input type="number" id="adminBillingDay" min="1" max="28" value="5" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+        </div>
+        <div><label class="block text-sm font-semibold text-gray-700 mb-2">Metode Perhitungan Harga</label> <select id="priceCalculation" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="per_package">Per Paket</option> <option value="per_mbps">Per Mbps</option> </select>
+        </div>
+        <div><label class="block text-sm font-semibold text-gray-700 mb-2">Harga per Mbps (Rp)</label> <input type="number" id="pricePerMbps" value="15000" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+       <h3 class="text-xl font-bold text-gray-800 mb-4">Paket Internet</h3>
+       <div id="packagesContainer" class="space-y-3 mb-4"><!-- Packages will be inserted here -->
+       </div><button onclick="addPackage()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition-all"> ➕ Tambah Paket </button>
+      </div>
+     </div>
+     <div class="mt-8 bg-white rounded-2xl p-6 shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+       <h3 class="text-xl font-bold text-gray-800">Backup &amp; Restore Data</h3>
+      </div>
+      <div class="flex flex-wrap gap-4"><button onclick="exportAllData()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 💾 Backup Semua Data </button>
+       <div><input type="file" id="restoreFile" accept=".json" class="hidden" onchange="restoreData(event)"> <button onclick="document.getElementById('restoreFile').click()" class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 📁 Restore Data </button>
+       </div><button onclick="clearAllData()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 🗑️ Hapus Semua Data </button>
+      </div>
+     </div>
+    </section>
+   </main>
+  </div><!-- Customer Modal -->
+  <div id="customerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+   <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+     <h3 class="text-2xl font-bold text-gray-800" id="modalTitle">Tambah Pelanggan Baru</h3><button onclick="closeCustomerModal()" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
     </div>
+    <form id="customerForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+     <div><label class="block text-sm font-semibold text-slate-700 mb-2">Nama Lengkap *</label> <input type="text" id="customerName" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Nama lengkap pelanggan">
+     </div>
+     <div><label class="block text-sm font-semibold text-slate-700 mb-2">Nomor HP *</label> <input type="tel" id="customerPhone" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="08xxxxxxxxxx">
+     </div>
+     <div class="md:col-span-2"><label class="block text-sm font-semibold text-slate-700 mb-2">Alamat</label> <textarea id="customerAddress" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Alamat lengkap pelanggan"></textarea>
+     </div>
+     <div><label class="block text-sm font-semibold text-slate-700 mb-2">Email</label> <input type="email" id="customerEmail" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="email@example.com">
+     </div>
+     <div><label class="block text-sm font-semibold text-slate-700 mb-2">PPPOe Username</label> <input type="text" id="customerPppoe" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="username_pppoe">
+     </div>
+     <div><label class="block text-sm font-semibold text-slate-700 mb-2">Paket Internet</label> <select id="customerPackage" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"> <option value="">Pilih Paket</option> <option value="BUMDes 10 Mbps - Rp 150.000">BUMDes 10 Mbps - Rp 150.000</option> <option value="Basic 10 Mbps - Rp 150.000">Basic 10 Mbps - Rp 150.000</option> <option value="Family 20 Mbps - Rp 200.000">Family 20 Mbps - Rp 200.000</option> <option value="Pro 50 Mbps - Rp 300.000">Pro 50 Mbps - Rp 300.000</option> <option value="Custom">Custom</option> </select>
+     </div>
+     <div><label class="block text-sm font-semibold text-slate-700 mb-2">Tanggal Aktivasi</label> <input type="date" id="customerActivationDate" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+     </div>
+     <div class="md:col-span-2 flex gap-4"><button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"> 💾 Simpan Pelanggan </button> <button type="button" onclick="closeCustomerModal()" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"> Batal </button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <script>
+        // Authentication
+        const ADMIN_USERNAME = 'internetcmmsc';
+        const ADMIN_PASSWORD = 'Cmmsc2018###';
+        let isLoggedIn = false;
 
-    <script>
         // Global variables
         let customers = JSON.parse(localStorage.getItem('cmmsc_customers') || '[]');
         let bills = JSON.parse(localStorage.getItem('cmmsc_bills') || '[]');
@@ -660,6 +442,33 @@ BUMDes Cikahuripan</textarea>
 
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        // Authentication functions
+        function checkLoginStatus() {
+            const savedLogin = sessionStorage.getItem('cmmsc_logged_in');
+            if (savedLogin === 'true') {
+                isLoggedIn = true;
+                showAdminDashboard();
+            } else {
+                showLoginScreen();
+            }
+        }
+
+        function showLoginScreen() {
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('publicFormScreen').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('publicFormScreen').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            
+            document.getElementById('adminUsername').textContent = ADMIN_USERNAME;
+            
             showSection('dashboard');
             updateDashboard();
             loadCustomers();
@@ -667,6 +476,7 @@ BUMDes Cikahuripan</textarea>
             loadRegistrations();
             loadPackages();
             loadSettings();
+            loadWhatsAppLogs();
             
             // Set current date for activation date
             document.getElementById('customerActivationDate').value = new Date().toISOString().split('T')[0];
@@ -679,6 +489,69 @@ BUMDes Cikahuripan</textarea>
             document.getElementById('waYear').value = now.getFullYear();
             document.getElementById('reportMonth').value = now.getMonth() + 1;
             document.getElementById('reportYear').value = now.getFullYear();
+        }
+
+        function showPublicForm() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('publicFormScreen').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        function backToLogin() {
+            showLoginScreen();
+        }
+
+        function logout() {
+            if (confirm('Yakin ingin logout?')) {
+                isLoggedIn = false;
+                sessionStorage.removeItem('cmmsc_logged_in');
+                showLoginScreen();
+            }
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                sessionStorage.setItem('cmmsc_logged_in', 'true');
+                errorDiv.classList.add('hidden');
+                showAdminDashboard();
+            } else {
+                errorDiv.textContent = '❌ Username atau password salah!';
+                errorDiv.classList.remove('hidden');
+            }
+        });
+
+        // Public registration form handler
+        document.getElementById('publicRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const registration = {
+                id: Date.now(),
+                name: document.getElementById('pubRegName').value,
+                phone: normalizePhone(document.getElementById('pubRegPhone').value),
+                email: document.getElementById('pubRegEmail').value,
+                address: document.getElementById('pubRegAddress').value,
+                package: document.getElementById('pubRegPackage').value,
+                status: 'pending',
+                submittedAt: new Date().toISOString()
+            };
+
+            registrations.push(registration);
+            saveRegistrations();
+            
+            document.getElementById('publicRegistrationForm').reset();
+            document.getElementById('publicFormSuccess').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('publicFormSuccess').classList.add('hidden');
+            }, 5000);
         });
 
         // Navigation
@@ -697,8 +570,10 @@ BUMDes Cikahuripan</textarea>
                 btn.classList.add('text-gray-600', 'border-transparent');
             });
             
-            event.target.classList.remove('text-gray-600', 'border-transparent');
-            event.target.classList.add('text-blue-600', 'border-blue-600');
+            if (event && event.target) {
+                event.target.classList.remove('text-gray-600', 'border-transparent');
+                event.target.classList.add('text-blue-600', 'border-blue-600');
+            }
         }
 
         // Dashboard functions
@@ -777,7 +652,7 @@ BUMDes Cikahuripan</textarea>
             updateDashboard();
             closeCustomerModal();
             
-            alert(currentEditingCustomer ? 'Pelanggan berhasil diupdate!' : 'Pelanggan baru berhasil ditambahkan!');
+            showNotification(currentEditingCustomer ? 'Pelanggan berhasil diupdate!' : 'Pelanggan baru berhasil ditambahkan!');
         }
 
         function deleteCustomer(customerId) {
@@ -789,7 +664,7 @@ BUMDes Cikahuripan</textarea>
                 loadCustomers();
                 loadBills();
                 updateDashboard();
-                alert('Pelanggan berhasil dihapus!');
+                showNotification('Pelanggan berhasil dihapus!');
             }
         }
 
@@ -837,7 +712,7 @@ BUMDes Cikahuripan</textarea>
                     </td>
                     <td class="px-6 py-4 text-sm">
                         <div class="flex space-x-2">
-                            <button onclick="openCustomerModal(${JSON.stringify(customer).replace(/"/g, '&quot;')})" class="text-blue-600 hover:text-blue-800 font-medium">Edit</button>
+                            <button onclick='openCustomerModal(${JSON.stringify(customer).replace(/'/g, "\\'")})'  class="text-blue-600 hover:text-blue-800 font-medium">Edit</button>
                             <button onclick="toggleCustomerStatus(${customer.id})" class="text-orange-600 hover:text-orange-800 font-medium">
                                 ${customer.status === 'active' ? 'Nonaktifkan' : 'Aktifkan'}
                             </button>
@@ -870,11 +745,10 @@ BUMDes Cikahuripan</textarea>
             reader.readAsText(file);
         }
 
-        // Import customers from CSV
         function importCustomers(csvText) {
             const lines = csvText.split('\n').filter(line => line.trim());
             if (lines.length < 2) {
-                alert('File CSV kosong atau tidak valid');
+                showNotification('File CSV kosong atau tidak valid', 'error');
                 return;
             }
 
@@ -892,7 +766,6 @@ BUMDes Cikahuripan</textarea>
                     customerData[header.toLowerCase().replace(/\s+/g, '_')] = values[index] || '';
                 });
 
-                // Map to our structure
                 const customer = {
                     id: Date.now() + Math.random(),
                     customerId: customerData.id_pelanggan || generateCustomerId(),
@@ -906,7 +779,6 @@ BUMDes Cikahuripan</textarea>
                     status: (customerData.status_pelanggan || customerData.status || 'aktif').toLowerCase() === 'aktif' ? 'active' : 'inactive'
                 };
 
-                // Validation: require name and phone
                 if (customer.name && customer.phone) {
                     customers.push(customer);
                     imported++;
@@ -918,12 +790,12 @@ BUMDes Cikahuripan</textarea>
             saveCustomers();
             loadCustomers();
             updateDashboard();
-            alert(`Import selesai!\nBerhasil: ${imported} pelanggan\nDilewati: ${skipped} baris (tanpa nama/nomor HP)`);
+            showNotification(`Import selesai! Berhasil: ${imported} pelanggan, Dilewati: ${skipped} baris`);
         }
 
         function exportCustomersToExcel() {
             if (customers.length === 0) {
-                alert('Tidak ada data pelanggan untuk diekspor');
+                showNotification('Tidak ada data pelanggan untuk diekspor', 'error');
                 return;
             }
 
@@ -956,13 +828,11 @@ BUMDes Cikahuripan</textarea>
                 [2, 'CUST-2024-002', 'Jane Smith', 'Jl. Sudirman No. 456', '628987654321', 'jane@example.com', 'jane_smith', 'Family 20 Mbps - Rp 200.000', '2024-01-20', 'Aktif']
             ];
             
-            // Create CSV content with proper formatting
             const allData = [headers, ...sampleData];
             let csvContent = '';
             
             allData.forEach(row => {
                 const csvRow = row.map(field => {
-                    // Convert to string and escape quotes
                     const stringField = String(field);
                     if (stringField.includes(',') || stringField.includes('"') || stringField.includes('\n')) {
                         return '"' + stringField.replace(/"/g, '""') + '"';
@@ -972,11 +842,9 @@ BUMDes Cikahuripan</textarea>
                 csvContent += csvRow + '\n';
             });
             
-            // Add BOM for Excel compatibility
             const BOM = '\uFEFF';
             const finalContent = BOM + csvContent;
             
-            // Create and download file
             const blob = new Blob([finalContent], { type: 'text/csv;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -988,7 +856,7 @@ BUMDes Cikahuripan</textarea>
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            alert('Template berhasil didownload! File dapat dibuka di Excel.');
+            showNotification('Template berhasil didownload!');
         }
 
         // Billing functions
@@ -1005,7 +873,6 @@ BUMDes Cikahuripan</textarea>
             let skipped = 0;
 
             activeCustomers.forEach(customer => {
-                // Check if bill already exists
                 const existingBill = bills.find(b => 
                     b.customerId === customer.id && 
                     b.month === currentMonth && 
@@ -1017,7 +884,6 @@ BUMDes Cikahuripan</textarea>
                     return;
                 }
 
-                // Calculate due date based on settings
                 let billingDay;
                 if (settings.billingMode === 'by_activation') {
                     const activationDate = new Date(customer.activationDate);
@@ -1027,10 +893,9 @@ BUMDes Cikahuripan</textarea>
                 }
 
                 const dueDate = new Date(currentYear, currentMonth - 1, billingDay);
-                dueDate.setDate(dueDate.getDate() + 7); // Add 7 days grace period
+                dueDate.setDate(dueDate.getDate() + 7);
 
-                // Calculate amount
-                let amount = 150000; // Default
+                let amount = 150000;
                 if (customer.package) {
                     const packageMatch = customer.package.match(/Rp\s*([\d.,]+)/);
                     if (packageMatch) {
@@ -1058,7 +923,7 @@ BUMDes Cikahuripan</textarea>
             loadBills();
             updateDashboard();
             
-            alert(`Generate tagihan selesai!\nBerhasil: ${generated} tagihan\nDilewati: ${skipped} tagihan (sudah ada)`);
+            showNotification(`Generate tagihan selesai! Berhasil: ${generated} tagihan, Dilewati: ${skipped} tagihan`);
         }
 
         function loadBills() {
@@ -1159,12 +1024,12 @@ BUMDes Cikahuripan</textarea>
             const template = document.getElementById('waTemplate').value;
 
             if (!month || !year) {
-                alert('Pilih bulan dan tahun terlebih dahulu');
+                showNotification('Pilih bulan dan tahun terlebih dahulu', 'error');
                 return;
             }
 
             if (!template.trim()) {
-                alert('Template pesan tidak boleh kosong');
+                showNotification('Template pesan tidak boleh kosong', 'error');
                 return;
             }
 
@@ -1175,7 +1040,7 @@ BUMDes Cikahuripan</textarea>
             );
 
             if (targetBills.length === 0) {
-                alert('Tidak ada tagihan yang belum dibayar untuk periode tersebut');
+                showNotification('Tidak ada tagihan yang belum dibayar untuk periode tersebut', 'error');
                 return;
             }
 
@@ -1195,7 +1060,6 @@ BUMDes Cikahuripan</textarea>
                         .replace(/{jatuh_tempo}/g, formatDate(bill.dueDate))
                         .replace(/{id_pelanggan}/g, customer.customerId ? `ID Pelanggan: ${customer.customerId}` : '');
 
-                    // Simulate WhatsApp sending (in real implementation, this would call WhatsApp API)
                     const log = {
                         id: Date.now() + Math.random(),
                         customerId: customer.id,
@@ -1213,7 +1077,7 @@ BUMDes Cikahuripan</textarea>
 
             saveWhatsAppLogs();
             loadWhatsAppLogs();
-            alert(`WhatsApp berhasil dikirim ke ${sent} pelanggan`);
+            showNotification(`WhatsApp berhasil dikirim ke ${sent} pelanggan`);
         }
 
         function loadWhatsAppLogs() {
@@ -1248,7 +1112,7 @@ BUMDes Cikahuripan</textarea>
             const year = document.getElementById('reportYear').value;
 
             if (!month || !year) {
-                alert('Pilih bulan dan tahun terlebih dahulu');
+                showNotification('Pilih bulan dan tahun terlebih dahulu', 'error');
                 return;
             }
 
@@ -1270,14 +1134,14 @@ BUMDes Cikahuripan</textarea>
             const year = document.getElementById('reportYear').value;
 
             if (!month || !year) {
-                alert('Pilih bulan dan tahun terlebih dahulu');
+                showNotification('Pilih bulan dan tahun terlebih dahulu', 'error');
                 return;
             }
 
             const reportBills = bills.filter(b => b.month == month && b.year == year);
             
             if (reportBills.length === 0) {
-                alert('Tidak ada data untuk periode tersebut');
+                showNotification('Tidak ada data untuk periode tersebut', 'error');
                 return;
             }
 
@@ -1301,28 +1165,6 @@ BUMDes Cikahuripan</textarea>
         }
 
         // Forms functions
-        function submitRegistration(event) {
-            event.preventDefault();
-            
-            const registration = {
-                id: Date.now(),
-                name: document.getElementById('regName').value,
-                phone: normalizePhone(document.getElementById('regPhone').value),
-                email: document.getElementById('regEmail').value,
-                address: document.getElementById('regAddress').value,
-                package: document.getElementById('regPackage').value,
-                status: 'pending',
-                submittedAt: new Date().toISOString()
-            };
-
-            registrations.push(registration);
-            saveRegistrations();
-            loadRegistrations();
-            
-            document.getElementById('registrationForm').reset();
-            alert('Pendaftaran berhasil dikirim!');
-        }
-
         function loadRegistrations() {
             const tbody = document.getElementById('registrationsTableBody');
             tbody.innerHTML = '';
@@ -1370,7 +1212,6 @@ BUMDes Cikahuripan</textarea>
         function approveRegistration(registrationId) {
             const registration = registrations.find(r => r.id === registrationId);
             if (registration && confirm('Setujui pendaftaran ini dan tambahkan sebagai pelanggan?')) {
-                // Add as customer
                 const customer = {
                     id: Date.now(),
                     customerId: generateCustomerId(),
@@ -1393,7 +1234,7 @@ BUMDes Cikahuripan</textarea>
                 loadRegistrations();
                 updateDashboard();
                 
-                alert('Pendaftaran disetujui dan pelanggan berhasil ditambahkan!');
+                showNotification('Pendaftaran disetujui dan pelanggan berhasil ditambahkan!');
             }
         }
 
@@ -1403,7 +1244,7 @@ BUMDes Cikahuripan</textarea>
                 registration.status = 'rejected';
                 saveRegistrations();
                 loadRegistrations();
-                alert('Pendaftaran ditolak');
+                showNotification('Pendaftaran ditolak');
             }
         }
 
@@ -1417,7 +1258,7 @@ BUMDes Cikahuripan</textarea>
 
         function exportFormsToExcel() {
             if (registrations.length === 0) {
-                alert('Tidak ada data formulir untuk diekspor');
+                showNotification('Tidak ada data formulir untuk diekspor', 'error');
                 return;
             }
 
@@ -1458,7 +1299,7 @@ BUMDes Cikahuripan</textarea>
             };
             
             localStorage.setItem('cmmsc_settings', JSON.stringify(settings));
-            alert('Pengaturan berhasil disimpan!');
+            showNotification('Pengaturan berhasil disimpan!');
         }
 
         function loadPackages() {
@@ -1507,7 +1348,7 @@ BUMDes Cikahuripan</textarea>
         }
 
         function updatePackageOptions() {
-            const selects = document.querySelectorAll('#customerPackage, #regPackage');
+            const selects = document.querySelectorAll('#customerPackage, #pubRegPackage');
             selects.forEach(select => {
                 const currentValue = select.value;
                 select.innerHTML = '<option value="">Pilih Paket</option>';
@@ -1579,9 +1420,9 @@ BUMDes Cikahuripan</textarea>
                     updateDashboard();
                     updatePackageOptions();
 
-                    alert('Data berhasil di-restore!');
+                    showNotification('Data berhasil di-restore!');
                 } catch (error) {
-                    alert('File backup tidak valid!');
+                    showNotification('File backup tidak valid!', 'error');
                 }
             };
             reader.readAsText(file);
@@ -1591,6 +1432,7 @@ BUMDes Cikahuripan</textarea>
             if (confirm('Yakin ingin menghapus SEMUA data? Tindakan ini tidak dapat dibatalkan!')) {
                 if (confirm('Konfirmasi sekali lagi: HAPUS SEMUA DATA?')) {
                     localStorage.clear();
+                    sessionStorage.clear();
                     location.reload();
                 }
             }
@@ -1604,10 +1446,8 @@ BUMDes Cikahuripan</textarea>
         }
 
         function normalizePhone(phone) {
-            // Remove all non-digits
             phone = phone.replace(/\D/g, '');
             
-            // Convert to 62xxx format
             if (phone.startsWith('0')) {
                 phone = '62' + phone.substring(1);
             } else if (!phone.startsWith('62')) {
@@ -1653,6 +1493,19 @@ BUMDes Cikahuripan</textarea>
             URL.revokeObjectURL(url);
         }
 
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-4 rounded-xl shadow-lg z-50 animate-fade-in ${
+                type === 'success' ? 'bg-green-600' : 'bg-red-600'
+            } text-white font-semibold`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
         // Storage functions
         function saveCustomers() {
             localStorage.setItem('cmmsc_customers', JSON.stringify(customers));
@@ -1672,16 +1525,12 @@ BUMDes Cikahuripan</textarea>
 
         // Event listeners
         document.getElementById('customerForm').addEventListener('submit', saveCustomer);
-        document.getElementById('registrationForm').addEventListener('submit', submitRegistration);
         
         // Settings change listeners
         document.getElementById('billingMode').addEventListener('change', saveSettings);
         document.getElementById('adminBillingDay').addEventListener('change', saveSettings);
         document.getElementById('priceCalculation').addEventListener('change', saveSettings);
         document.getElementById('pricePerMbps').addEventListener('change', saveSettings);
-
-        // Load WhatsApp logs on page load
-        loadWhatsAppLogs();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9903da51476c6d21',t:'MTc2MDc0NjY0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ae22dcc286e9c8',t:'MTc2MjUzMjE5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
